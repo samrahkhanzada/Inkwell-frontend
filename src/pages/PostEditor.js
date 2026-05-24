@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
+import { useTheme } from '../context/ThemeContext';
 import uploadImage from "../utils/uploadImage";
 import { DefaultEditor } from "react-simple-wysiwyg";
 // import ReactQuill from 'react-quill';
@@ -24,6 +25,7 @@ const STATUSES = ["draft", "published", "scheduled"];
 
 export default function PostEditor() {
   const { id } = useParams();
+  const { colors } = useTheme();
   const navigate = useNavigate();
   const isEdit = !!id;
 
@@ -318,26 +320,21 @@ export default function PostEditor() {
         <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
           {/* Title */}
           <input
-            value={form.title}
-            onChange={(e) => set("title", e.target.value)}
-            placeholder="Post title…"
-            style={{
-              width: "100%",
-              fontSize: "1.75rem",
-              fontFamily: '"Playfair Display", serif',
-              fontWeight: "700",
-              border: "none",
-              borderBottom: "2px solid #efefef",
-              outline: "none",
-              paddingBottom: "12px",
-              backgroundColor: "transparent",
-              color: "#0d0d0d",
-              transition: "border-color 0.2s",
-            }}
-            onFocus={(e) => (e.target.style.borderBottomColor = "#e85d04")}
-            onBlur={(e) => (e.target.style.borderBottomColor = "#efefef")}
-          />
-
+  value={form.title}
+  onChange={(e) => set('title', e.target.value)}
+  placeholder="Post title…"
+  style={{
+    width: '100%', fontSize: '1.75rem',
+    fontFamily: '"Playfair Display", serif', fontWeight: '700',
+    border: 'none', borderBottom: `2px solid ${colors.border}`,
+    outline: 'none', paddingBottom: '12px',
+    backgroundColor: 'transparent',
+    color: colors.text,
+    transition: 'border-color 0.2s',
+  }}
+  onFocus={(e) => e.target.style.borderBottomColor = '#e85d04'}
+  onBlur={(e) => e.target.style.borderBottomColor = colors.border}
+/>
           {/* Rich text editor */}
 
           {/* <div style={{ border: '1px solid #d9d9d9', borderRadius: '8px', overflow: 'hidden' }}>
