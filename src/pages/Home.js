@@ -19,12 +19,22 @@ export default function Home() {
       api.get('/posts?limit=9'),
       api.get('/categories'),
     ])
+      // .then(([f, r, c]) => {
+      //   setFeatured(f.data.posts);
+      //   setRecent(r.data.posts);
+      //   setCategories(c.data.categories.slice(0, 8));
+      // })
       .then(([f, r, c]) => {
-        setFeatured(f.data.posts);
-        setRecent(r.data.posts);
-        setCategories(c.data.categories.slice(0, 8));
-      })
-      .finally(() => setLoading(false));
+  setFeatured(f.data.posts || []);
+  setRecent(r.data.posts || []);
+  setCategories((c.data.categories || []).slice(0, 8));
+})
+.catch(() => {
+  setFeatured([]);
+  setRecent([]);
+  setCategories([]);
+})
+  .finally(() => setLoading(false));
   }, []);
 
   return (
