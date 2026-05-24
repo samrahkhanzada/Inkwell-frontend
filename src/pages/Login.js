@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import { FiMail, FiLock, FiEye, FiEyeOff, FiBookOpen } from 'react-icons/fi';
 
 export default function Login() {
   const { login }    = useAuth();
+  const { colors }   = useTheme();
   const navigate     = useNavigate();
   const location     = useLocation();
   const from         = location.state?.from?.pathname || '/';
@@ -16,9 +18,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.email || !form.password) {
-      return toast.error('Please fill in all fields');
-    }
+    if (!form.email || !form.password) return toast.error('Please fill in all fields');
     setLoading(true);
     try {
       await login(form.email, form.password);
@@ -35,13 +35,15 @@ export default function Login() {
     <div style={{
       minHeight: 'calc(100vh - 64px)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      backgroundColor: '#f7f7f7', padding: '48px 16px',
+      backgroundColor: colors.bg, padding: '48px 16px',
     }}>
       <div style={{ width: '100%', maxWidth: '440px' }}>
         <div style={{
-          backgroundColor: '#fff', borderRadius: '24px',
+          backgroundColor: colors.cardBg,
+          borderRadius: '24px',
           padding: '40px 36px',
-          boxShadow: '0 4px 32px rgba(0,0,0,0.08)',
+          boxShadow: '0 4px 32px rgba(0,0,0,0.12)',
+          border: `1px solid ${colors.border}`,
         }}>
 
           {/* Logo */}
@@ -56,73 +58,97 @@ export default function Login() {
             </div>
           </div>
 
-          <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.875rem', fontWeight: '700', textAlign: 'center', color: '#0d0d0d', margin: '0 0 6px' }}>
+          <h1 style={{
+            fontFamily: '"Playfair Display", serif',
+            fontSize: '1.875rem', fontWeight: '700',
+            textAlign: 'center', color: colors.text,
+            margin: '0 0 6px',
+          }}>
             Welcome back
           </h1>
-          <p style={{ textAlign: 'center', color: '#737373', fontSize: '0.875rem', marginBottom: '32px' }}>
+          <p style={{
+            textAlign: 'center', color: colors.textSecondary,
+            fontSize: '0.875rem', marginBottom: '32px',
+          }}>
             Sign in to continue reading and writing
           </p>
 
           <form onSubmit={handleSubmit}>
-
             {/* Email */}
             <div style={{ marginBottom: '16px' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#404040', marginBottom: '6px' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: colors.text, marginBottom: '6px' }}>
                 Email
               </label>
               <div style={{ position: 'relative' }}>
-                <FiMail size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#909090' }} />
+                <FiMail size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: colors.textMuted }} />
                 <input
                   type="email"
                   value={form.email}
                   onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
                   placeholder="you@example.com"
                   required
-                  className="input"
-                  style={{ paddingLeft: '38px' }}
+                  style={{
+                    width: '100%', padding: '10px 16px 10px 38px',
+                    border: `1px solid ${colors.border}`,
+                    borderRadius: '8px',
+                    backgroundColor: colors.inputBg,
+                    color: colors.text,
+                    fontSize: '0.875rem',
+                    outline: 'none',
+                    fontFamily: '"DM Sans", sans-serif',
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = '#e85d04'}
+                  onBlur={(e) => e.target.style.borderColor = colors.border}
                 />
               </div>
             </div>
 
             {/* Password */}
             <div style={{ marginBottom: '8px' }}>
-              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: '#404040', marginBottom: '6px' }}>
+              <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', color: colors.text, marginBottom: '6px' }}>
                 Password
               </label>
               <div style={{ position: 'relative' }}>
-                <FiLock size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#909090' }} />
+                <FiLock size={15} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: colors.textMuted }} />
                 <input
                   type={showPass ? 'text' : 'password'}
                   value={form.password}
                   onChange={(e) => setForm((p) => ({ ...p, password: e.target.value }))}
                   placeholder="••••••••"
                   required
-                  className="input"
-                  style={{ paddingLeft: '38px', paddingRight: '38px' }}
+                  style={{
+                    width: '100%', padding: '10px 38px',
+                    border: `1px solid ${colors.border}`,
+                    borderRadius: '8px',
+                    backgroundColor: colors.inputBg,
+                    color: colors.text,
+                    fontSize: '0.875rem',
+                    outline: 'none',
+                    fontFamily: '"DM Sans", sans-serif',
+                  }}
+                  onFocus={(e) => e.target.style.borderColor = '#e85d04'}
+                  onBlur={(e) => e.target.style.borderColor = colors.border}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPass((v) => !v)}
-                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#909090' }}
+                  style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: colors.textMuted }}
                 >
                   {showPass ? <FiEyeOff size={15} /> : <FiEye size={15} />}
                 </button>
               </div>
+              <div style={{ textAlign: 'right', marginTop: '6px' }}>
+                <Link to="/forgot-password" style={{ fontSize: '0.8125rem', color: '#e85d04', textDecoration: 'none' }}>
+                  Forgot password?
+                </Link>
+              </div>
             </div>
 
-            {/* Forgot password */}
-            <div style={{ textAlign: 'right', marginBottom: '24px' }}>
-              <Link to="/forgot-password" style={{ fontSize: '0.8125rem', color: '#e85d04', textDecoration: 'none' }}>
-                Forgot password?
-              </Link>
-            </div>
-
-            {/* Submit */}
             <button
               type="submit"
               disabled={loading}
               className="btn-primary"
-              style={{ width: '100%', padding: '14px', fontSize: '1rem' }}
+              style={{ width: '100%', padding: '14px', fontSize: '1rem', marginTop: '16px' }}
             >
               {loading ? (
                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
@@ -134,7 +160,7 @@ export default function Login() {
             <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
           </form>
 
-          <p style={{ textAlign: 'center', fontSize: '0.875rem', color: '#737373', marginTop: '24px' }}>
+          <p style={{ textAlign: 'center', fontSize: '0.875rem', color: colors.textSecondary, marginTop: '24px' }}>
             Don't have an account?{' '}
             <Link to="/register" style={{ color: '#e85d04', fontWeight: '600', textDecoration: 'none' }}>
               Create one free
