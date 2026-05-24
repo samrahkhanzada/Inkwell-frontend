@@ -217,7 +217,7 @@ export default function PostEditor() {
   }
 
   return (
-    <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "40px 24px" }}>
+    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '40px 24px', backgroundColor: colors.bg, minHeight: '100vh' }}>
       {/* Top bar */}
       <div
         style={{
@@ -250,17 +250,9 @@ export default function PostEditor() {
           >
             <FiArrowLeft size={20} />
           </button>
-          <h1
-            style={{
-              fontFamily: '"Playfair Display", serif',
-              fontSize: "1.5rem",
-              fontWeight: "700",
-              margin: 0,
-              color: "#0d0d0d",
-            }}
-          >
-            {isEdit ? "Edit post" : "New post"}
-          </h1>
+          <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '1.5rem', fontWeight: '700', margin: 0, color: colors.text }}>
+  {isEdit ? 'Edit post' : 'New post'}
+</h1>
         </div>
         <div
           style={{
