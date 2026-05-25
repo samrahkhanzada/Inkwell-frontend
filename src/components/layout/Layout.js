@@ -289,6 +289,7 @@ export default function Layout() {
                 color: isDark ? "#f7f7f7" : "#404040",
                 transition: "all 0.2s",
                 backgroundColor: isDark ? "#1a1a1a" : "#f7f7f7",
+                display: none,
               }}
             >
               {isDark ? (
