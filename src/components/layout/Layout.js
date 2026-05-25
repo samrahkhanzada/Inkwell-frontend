@@ -271,6 +271,7 @@ export default function Layout() {
 
             {/* Mobile hamburger */}
             {/* Dark mode toggle */}
+
             // <button
             //   onClick={toggleTheme}
             //   title={isDark ? "Switch to light mode" : "Switch to dark mode"}
