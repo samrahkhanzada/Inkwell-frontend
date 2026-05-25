@@ -272,32 +272,32 @@ export default function Layout() {
             {/* Mobile hamburger */}
             {/* Dark mode toggle */}
 
-            // <button
-            //   onClick={toggleTheme}
-            //   title={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            //   style={{
-            //     background: "none",
-            //     border: "1px solid",
-            //     borderColor: isDark ? "#333" : "#d9d9d9",
-            //     borderRadius: "9999px",
-            //     cursor: "pointer",
-            //     padding: "6px 12px",
-            //     display: "flex",
-            //     alignItems: "center",
-            //     gap: "6px",
-            //     fontSize: "0.8125rem",
-            //     color: isDark ? "#f7f7f7" : "#404040",
-            //     transition: "all 0.2s",
-            //     backgroundColor: isDark ? "#1a1a1a" : "#f7f7f7",
-            //   }}
-            // >
-            //   {isDark ? (
-            //     <FiSun size={15} color="#f48c06" />
-            //   ) : (
-            //     <FiMoon size={15} color="#404040" />
-            //   )}
-            //   {isDark ? "Light" : "Dark"}
-            // </button>
+            <button
+              onClick={toggleTheme}
+              title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              style={{
+                background: "none",
+                border: "1px solid",
+                borderColor: isDark ? "#333" : "#d9d9d9",
+                borderRadius: "9999px",
+                cursor: "pointer",
+                padding: "6px 12px",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                fontSize: "0.8125rem",
+                color: isDark ? "#f7f7f7" : "#404040",
+                transition: "all 0.2s",
+                backgroundColor: isDark ? "#1a1a1a" : "#f7f7f7",
+              }}
+            >
+              {isDark ? (
+                <FiSun size={15} color="#f48c06" />
+              ) : (
+                <FiMoon size={15} color="#404040" />
+              )}
+              {isDark ? "Light" : "Dark"}
+            </button>
 
             {/* Mobile hamburger */}
             <button
