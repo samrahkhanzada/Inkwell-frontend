@@ -276,7 +276,6 @@ export default function Layout() {
               onClick={toggleTheme}
               title={isDark ? "Switch to light mode" : "Switch to dark mode"}
               style={{
-                display: none,
                 background: "none",
                 border: "1px solid",
                 borderColor: isDark ? "#333" : "#d9d9d9",
